@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AddEtudiantController!{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tr class="table-active">
+            <td>FirstName</td>
+            <td>LastName</td>
+            <td>section</td>
+        </tr>
+        {% for user in liste %}
+            <tr class="table-{% if loop.index is odd %}danger{% else %}warning{% endif %}">
+                <td>{{ user.nom}}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.section}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
