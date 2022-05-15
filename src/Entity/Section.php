@@ -32,7 +32,7 @@ class Section
         return $this->id;
     }
 
-    public function getDesignation(): string
+    public function getDesignation(): string|null
     {
         return $this->designation;
     }

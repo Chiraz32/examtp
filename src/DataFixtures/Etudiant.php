@@ -8,12 +8,8 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
 class Etudiant extends Fixture
-{
-    public function load(ObjectManager $manager): void
-    {
-
-
-        $faker=Factory::create();
+{public function load(ObjectManager $manager): void
+    {$faker=Factory::create();
         for($i=0;$i<30;$i++)
         {
             $etudiant =new \App\Entity\Etudiant() ;
@@ -27,14 +23,6 @@ class Etudiant extends Fixture
             $etudiant->setPrenom($faker->lastName);
             $manager->persist($etudiant);
         }
-
-
-
-
-
-
-
-
 
         $manager->flush();
     }

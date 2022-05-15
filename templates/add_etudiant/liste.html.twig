@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des étudiants
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+
+
+            <table class="table">
+
+            <a href="{{path("edit_etudiant")}}">Ajouter une personne</a>
+            <thead>
+            <tr class="table-active">
+                <th >
+                    Nom
+                </th>
+                <th >Prenom
+                </th>
+                <th >Section
+                </th>
+                <th >Action
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for etudiant in etudiants %}
+                <tr  class="table-{% if loop.index is odd %}danger{% else %}warning{% endif %}">
+                    <td>{{etudiant.nom}}</td>
+                    <td>{{etudiant.prenom}}</td>
+                    <td>{{etudiant.section is null ?  "Non encore affecté" : etudiant.section}}</td>
+                    <td>
+                        <a href="{{path("edit_etudiant", {id: etudiant.id })}}">Edit</a>
+                        |
+                        <a href="{{path("delete_etudiant", {id: etudiant.id })}}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+        <ul class="pagination" >
+                {% if page != 1 %}
+                    <li class="page-item">
+                        <a
+                                class="page-link"
+                                href="{{ path('all_etudiant', {page: page - 1, nbre: nbre}) }}"
+                        >
+                            Previous
+                        </a></li>
+                {% endif %}
+                {% for i in range(max(page - 5, 1), min(page + 5, nbrePage)) %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{{ path('all_etudiant', {page: i, nbre: nbre}) }}"
+                        >{{ i }}
+                        </a>
+                    </li>
+                {% endfor %}
+                {% if page != nbrePage %}
+                    <li class="page-item">
+                        <a
+                                class="page-link"
+                                href="{{ path('all_etudiant', {page: page + 1, nbre: nbre}) }}"
+                        >Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('assets/js/style.js') }}"></script>
+{% endblock %}
